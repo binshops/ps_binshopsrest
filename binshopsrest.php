@@ -17,8 +17,8 @@ class Binshopsrest extends Module
     {
         $this->name = 'binshopsrest';
         $this->tab = 'others';
-        $this->version = '1.0.0';
-        $this->author = 'hessam';
+        $this->version = '1.0.2';
+        $this->author = 'Binshops';
         $this->need_instance = 0;
 
         /**
@@ -29,7 +29,7 @@ class Binshopsrest extends Module
         parent::__construct();
 
         $this->displayName = $this->l('Binshops REST');
-        $this->description = $this->l('REST API module developed by Binshops group');
+        $this->description = $this->l('This module exposes REST API endpoints for your Prestashop website');
 
         $this->confirmUninstall = $this->l('');
 
@@ -44,11 +44,11 @@ class Binshopsrest extends Module
     {
         Configuration::updateValue('BINSHOPSREST_LIVE_MODE', false);
 
-        include(dirname(__FILE__).'/sql/install.php');
+//        include(dirname(__FILE__).'/sql/install.php');
 
         return parent::install() &&
             $this->registerHook('header') &&
-            $this->registerHook('backOfficeHeader');
+            $this->registerHook('backOfficeHeader') && $this->registerHook('moduleRoutes');
     }
 
     public function uninstall()
@@ -76,7 +76,7 @@ class Binshopsrest extends Module
 
         $output = $this->context->smarty->fetch($this->local_path.'views/templates/admin/configure.tpl');
 
-        return $output.$this->renderForm();
+        return $output;
     }
 
     /**
@@ -201,5 +201,38 @@ class Binshopsrest extends Module
     {
         $this->context->controller->addJS($this->_path.'/views/js/front.js');
         $this->context->controller->addCSS($this->_path.'/views/css/front.css');
+    }
+
+    public function hookModuleRoutes()
+    {
+        return [
+            'module-binshopsrest-bootstrap' => [
+                'rule' => 'rest/bootstrap',
+                'keywords' => [],
+                'controller' => 'bootstrap',
+                'params' => [
+                    'fc' => 'module',
+                    'module' => 'binshopsrest'
+                ]
+            ],
+            'module-binshopsrest-productdetail' => [
+                'rule' => 'rest/productdetail',
+                'keywords' => [],
+                'controller' => 'productdetail',
+                'params' => [
+                    'fc' => 'module',
+                    'module' => 'binshopsrest'
+                ]
+            ],
+            'module-binshopsrest-categoryproducts' => [
+                'rule' => 'rest/categoryProducts',
+                'keywords' => [],
+                'controller' => 'categoryproducts',
+                'params' => [
+                    'fc' => 'module',
+                    'module' => 'binshopsrest'
+                ]
+            ],
+        ];
     }
 }
