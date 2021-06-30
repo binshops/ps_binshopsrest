@@ -4,8 +4,11 @@ This module setups REST API endpoint for any Prestashop website. This module doe
 ### Full Endpoint on PrestaShop Marketplace (2021)
 https://addons.prestashop.com/en/website-performance/52062-binshops-rest-api.html#overview
 
+Check and test all endpoints for Pro version:
+https://documenter.getpostman.com/view/1491681/TzkyP1UC
+
 ### Demo Link
-https://ps.binshops.com/rest/bootstrap
+https://rest.binshops.com/rest/bootstrap
 
 ### API Endpoint
 Your REST API endpoint: http://yourdomain.tld/rest.
@@ -20,4 +23,4 @@ You can get more info about this module: https://www.binshops.com/prestashop-res
 
 ### Documentation
 You can access full documentation for REST endpoints on Postman publisher:
-https://documenter.getpostman.com/view/1491681/SWT5jMRb
+https://documenter.getpostman.com/view/1491681/TzkyP1UC
